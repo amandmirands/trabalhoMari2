@@ -1,0 +1,218 @@
+#:kivy 1.11.1
+
+<MainWidget>:
+    orientation: 'vertical'
+    canvas:
+        Color:
+            rgb: 0.5,0.5,0.5
+        Rectangle:
+            size: self.size
+    
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint: (1,0.1)
+        spacing: 10
+        
+        Label:
+            text: 'SUPERVISÓRIO ESTEIRA v1.0'
+            size_hint: (0.4375,1)
+            width: 300
+        
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: (0.4375,1)
+            width: 400
+
+            Label:
+                text: 'Configurações'
+
+            BoxLayout:
+                orientation: 'horizontal'
+
+                Button:
+                    text: 'MODBUS'
+                    on_release: root._modbusPopup.open()
+
+                Button:
+                    text: 'Scan Time'
+                    on_release: root._scanPopup.open()
+
+        Image: 
+            id: img_con
+            size_hint: (0.125,1)
+            width: 80
+            source: 'imgs/desconectado.png'
+            pos_hint: {'top': 1, 'right': 1}
+
+
+    FloatLayout: 
+        canvas:
+            Color:
+                rgb: 0.97,0.97,0.97
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+        Image:
+            id: img_mari
+            source: 'imgs/Mari_desligado.png'
+            size: root.width, root.height
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+   
+        Button:
+            text:'Status'
+            font_size: 16
+            size: 120, 25
+            size_hint: None, None
+            pos_hint: {'center_x': 0.25, 'center_y': 0.18}
+            on_release: root._motor.open()
+
+        Button:
+            text:'Temp. Motor'
+            font_size: 16
+            size: 120, 25
+            size_hint: None, None
+            pos_hint: {'center_x': 0.25, 'center_y': 0.06}
+            on_release: root._temp.open()
+
+        Button:
+            text:'Tensão Motor'
+            font_size: 16
+            size: 120, 25
+            size_hint: None, None
+            pos_hint: {'center_x': 0.25, 'center_y': 0.14}
+            on_release: root._ddp.open()
+        
+        Button:
+            text:'Corrente Motor'
+            font_size: 16
+            size: 120, 25
+            size_hint: None, None
+            pos_hint: {'center_x': 0.25, 'center_y': 0.10}
+            on_release: root._corr.open()
+        
+        Label:
+            id: activeMotor
+            text: 'DESLIGADO'
+            font_size: 16
+            bold: True
+            pos_hint: {'center_x': 0.22, 'center_y': 0.5}
+            halign: 'center'
+            color: 0,0,0,1
+            canvas.before:
+                Color:
+                    rgb: 0.6,0.6,0.6
+                Rectangle:
+                    size: 120,25
+                    pos: 160,364
+
+        Label:
+            text: 'Info Motor'
+            font_size: 18
+            color: 0,0,0,1
+            pos_hint: {'center_x': 0.25, 'center_y': 0.22}
+
+        Image:
+            source: 'imgs/model.png'
+            size_hint: None, None  
+            size: dp(100), dp(100)
+            pos_hint: {'center_x': 0.36, 'center_y': 0.70}
+
+        Label:
+            text: 'CARGA'
+            font_size: 18
+            color: 0,0,0,1
+            pos_hint: {'center_x': 0.36, 'center_y': 0.72}
+
+        MeasureLabel:
+            id: carga
+            text: '-.-   Kgf/cm3'
+            pos_hint: {'center_x': 0.36, 'center_y': 0.68}
+
+        Image:
+            source: 'imgs/model.png'
+            size_hint: None, None  
+            size: dp(100), dp(100)
+            pos_hint: {'center_x': 0.08, 'center_y': 0.20}
+
+        Label:
+            text: 'TORQUE'
+            font_size: 18
+            color: 0,0,0,1
+            pos_hint: {'center_x': 0.08, 'center_y': 0.22}
+
+        MeasureLabel:
+            id: torque
+            text: '-.-   N.m'
+            pos_hint: {'center_x': 0.08, 'center_y': 0.18}
+
+        Label:
+            text: 'ROTAÇÃO'
+            font_size: 18
+            color: 0,0,0,1
+            pos_hint: {'center_x': 0.55, 'center_y': 0.30}
+
+        Image:
+            source: 'imgs/model.png'
+            size_hint: None, None  
+            size: dp(100), dp(100)
+            pos_hint: {'center_x': 0.55, 'center_y': 0.22}
+
+        Label:
+            text: 'MOTOR'
+            font_size: 18
+            color: 0,0,0,1
+            pos_hint: {'center_x': 0.55, 'center_y': 0.24}
+
+        MeasureLabel:
+            id: freq_rot
+            text: '-.-   RPM'
+            pos_hint: {'center_x': 0.55, 'center_y': 0.20}
+
+        Image:
+            source: 'imgs/model.png'
+            size_hint: None, None  
+            size: dp(100), dp(100)
+            pos_hint: {'center_x': 0.55, 'center_y': 0.10}
+
+        Label:
+            text: 'ESTEIRA'
+            font_size: 18
+            color: 0,0,0,1
+            pos_hint: {'center_x': 0.55, 'center_y': 0.12}
+
+        MeasureLabel:
+            id: vel_est
+            text: '-.-   m/min'
+            pos_hint: {'center_x': 0.55, 'center_y': 0.08}
+
+
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint: (1,0.1)
+
+        Button:
+            id: commandsButton
+            text: 'Comandos'
+            on_release: root._commands.open()
+            disabled: True
+
+        Button:
+            id: measButton
+            text: 'Gráfico tempo real'
+            on_release: root._realTimeGraph.open() 
+            disabled: True
+        Button:
+            text: 'Dados históricos'
+            on_release: root._hGraph.open()
+
+
+<MeasureLabel@Label>:
+    font_size: 12
+    bold: True
+    halign: 'center'
+    color: 0,0,0,1
+
+        
+        

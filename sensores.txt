@@ -1,0 +1,29 @@
+inf. motor
+Corrente
+Tensão 
+Temperatura
+
+
+4X	840		es.corrente_r	100	Corrente na fase R 		corr_R
+4X	841		es.corrente_s	100	Corrente na fase S		corr_S
+4X	842		es.corrente_t	100	Corrente na fase T		corr_T
+4X	843		es.corrente_n	100	Corrente no Neutro		corr_N
+
+4X	847		es.tensao_rs	10	ddp entre Fase R e S		ddp_RS
+4X	848		es.tensao_st	10	ddp entre Fase S e T		ddp_ST
+4X	849		es.tensao_tr	10	ddp entre Fase T e R		ddp_TR
+
+FP	700		es.temp_r	10	Temperatura Enrolamento R Motor		temp_R
+FP	702		es.temp_s	10	Temperatura Enrolamento S Motor		temp_S
+FP	704		es.temp_t	10	Temperatura Enrolamento T Motor		temp_T
+FP	706		es.temp_carc	10	Temperatura Carcaça			temp_C
+
+Criar botão em mainWinget = linha 61-67
+
+passar os parametros no main e no model, lembrar de excluir a pasta
+
+1773 x 1047
+5834 x 3442
+
+
+
